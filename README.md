@@ -12,3 +12,5 @@ def some_fun_to_memoize(x, y, z):
 ```
 
 run from command line python memoizepy.py for a speed test
+
+if you wish to use something other than redis, change the store and get functions appropriately
