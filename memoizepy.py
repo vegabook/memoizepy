@@ -21,8 +21,6 @@ def serialize(x):
 def hash(x):
     return str(mmh3.hash128(serialize(x)))
 
-store_dict = {}
-
 
 def store(hash, data):
     r.set(hash, data)
@@ -67,7 +65,7 @@ def primes_between(a, b):
     return(len(primes))
 
 def testspeed(num_processes = 6, eigruns = 6):
-    adim = 200
+    adim = 500
     num_processes = 6
     arrays = [np.random.rand(adim * adim).reshape(adim, adim) for _ in range(eigruns)]
     print("longrun_eig not memoized:")
