@@ -1,12 +1,14 @@
-# memoizepy
+## memoizepy
 
 use to memoize a function using Redis. 
 Experimental for now. 
 Relies on Redis on default port and localhost
-# usage:
+## usage:
 ```
-import memoizepy
+from memoizepy import memoize
 @memoize
-def sum_fun_to_memoize(x, y, z):
-    sum(x, y, z)
+def some_fun_to_memoize(x, y, z):
+    return sum(x, y, z)
 ```
+
+run from command line python memoizepy.py for a speed test
