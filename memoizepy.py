@@ -10,13 +10,9 @@ import mmh3                     # fast hashing library
 from functools import wraps
 import redis
 import pdb
-
-
 try: 
     import cPickle as pickle
 except ImportError: 
-    print("Could not import cPickle")
-    print("Reverting to pickle")
     import pickle
 
 r = redis.Redis(host = "localhost", port = 6379)
