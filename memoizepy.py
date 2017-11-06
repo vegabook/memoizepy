@@ -49,7 +49,7 @@ def memoize(func):
         signature = (func_name, args, kwargs) 
         sig_hash = hash(signature)
         stored_res = get(sig_hash)
-        if stored_res: 
+        if stored_res is not None:
             return stored_res
         else:
             func_val = func(*args, **kwargs)
