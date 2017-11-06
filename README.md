@@ -24,10 +24,17 @@ from memoizepy import memoize
 def some_fun_to_memoize(x, y, z):
     return x + y + z
 
+some_fun_to_memoize(1, 2, 3)   # this will calculate
+>>> 6               
+
+some_fun_to_memoize(1, 2, 3)   # this will return from cache
+>>> 6               
+
 ```
 
 There are some long-running really numerically intensive decorated functions in memoizetest.py for your perusal, namely longrun_eig and primes_between. 
 
 run from command line python memoizepy.py for a speed test
 
-if you wish to use something other than redis, change the store and get functions appropriately
+Use of Redis means multiple users can share cached calculations if using the same Redis server.
+
