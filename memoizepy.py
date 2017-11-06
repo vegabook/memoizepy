@@ -20,7 +20,6 @@ except ImportError:
     import pickle
 
 r = redis.Redis(host = "localhost", port = 6379)
-r.flushall()
 
 
 def hash(x):
