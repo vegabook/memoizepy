@@ -7,9 +7,8 @@ from __future__ import print_function
 # For other data stores, change store and get functions appropriately
 
 import mmh3                     # fast hashing library
-from functools import wraps
+from functools import wraps     # multiprocessing pool-safe decorators
 import redis
-import pdb
 try: 
     import cPickle as pickle
 except ImportError: 
