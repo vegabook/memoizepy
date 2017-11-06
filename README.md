@@ -19,7 +19,6 @@ Works on 2.7 and 3.x. Be careful to ensure a fast pickle is installed, that's cP
 ## usage:
 ```
 from memoizepy import memoize
-import numpy as np
 
 @memoize
 def some_fun_to_memoize(x, y, z):
