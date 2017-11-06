@@ -2,7 +2,7 @@
 
 use to memoize a function using Redis. 
 Relies on Redis on default port and localhost. 
-Works on Numpy and Pandas.
+Works on Numpy but Pandas is not complete yet. 
 
 ## usage:
 ```
