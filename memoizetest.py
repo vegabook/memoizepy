@@ -6,6 +6,7 @@ from rx import Observable
 import random
 from concurrent.futures import ProcessPoolExecutor
 from memoizepy import memoize
+import IPython
 
 
 @memoize
@@ -23,7 +24,7 @@ def primes_between(a, b):
     return(len(primes))
 
 def testspeed(num_processes = 6, eigruns = 10):
-    adim = 1000
+    adim = 100
     num_processes = 6
     arrays = [np.random.rand(adim * adim).reshape(adim, adim) for _ in range(eigruns)]
     print("longrun_eig not memoized:")
@@ -41,7 +42,7 @@ def testspeed(num_processes = 6, eigruns = 10):
         .subscribe(print)
     print("time taken {}".format(datetime.utcnow() - now_time))
     print()
-    test_ranges = [(random.randint(1, 5000), random.randint(5001, 25000)) for _ in range(eigruns)]
+    test_ranges = [(random.randint(1, 5000), random.randint(5001, 10000)) for _ in range(eigruns)]
     print("primes_between not memoized:")
     now_time = datetime.utcnow()
     with ProcessPoolExecutor(num_processes) as executor:

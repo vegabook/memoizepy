@@ -8,27 +8,36 @@ from __future__ import print_function
 
 import mmh3                     # fast hashing library
 import pandas as pd
-import msgpack                  # fast serializer 
-import msgpack_numpy as m       # extends msgpack to Numpy: pip install msgpack-numpy
 from functools import wraps
 import redis
+import pdb
 
-m.patch()                       # patch msgpack to be able to do ndarrays
+
+try: 
+    import cPickle as pickle
+except ImportError: 
+    print("Could not import cPickle")
+    print("Reverting to pickle")
+    import pickle
 
 r = redis.Redis(host = "localhost", port = 6379, decode_responses = True)
+r.flushall()
 
 
 def hash(x):
-    xx = [z.to_msgpack() if isinstance(z, pd.DataFrame) else z for z in x]
-    return str(mmh3.hash128(msgpack.packb(xx)))
+    return mmh3.hash128(pickle.dumps(x))
 
 
 def store(hash, data):
-    return r.set(hash, data)
+    return r.set(hash, pickle.dumps(data))
 
 
 def get(hash):
-    return r.get(hash)
+    pickled = r.get(hash)
+    if pickled is None:
+        return None
+    else: 
+        return pickle.loads(str(pickled))
 
 
 def memoize(func):
@@ -41,6 +50,7 @@ def memoize(func):
         signature = (func_name, args, kwargs) 
         sig_hash = hash(signature)
         stored_res = get(sig_hash)
+        print(stored_res)
         if stored_res: 
             return stored_res
         else:
