@@ -23,8 +23,8 @@ def primes_between(a, b):
             primes.append(num)
     return(len(primes))
 
-def testspeed(num_processes = 6, eigruns = 10):
-    adim = 100
+def testspeed(num_processes = 6, eigruns = 6):
+    adim = 10
     num_processes = 6
     arrays = [np.random.rand(adim * adim).reshape(adim, adim) for _ in range(eigruns)]
     print("longrun_eig not memoized:")

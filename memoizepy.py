@@ -19,7 +19,7 @@ except ImportError:
     print("Reverting to pickle")
     import pickle
 
-r = redis.Redis(host = "localhost", port = 6379, decode_responses = True)
+r = redis.Redis(host = "localhost", port = 6379)
 r.flushall()
 
 
@@ -36,7 +36,7 @@ def get(hash):
     if pickled is None:
         return None
     else: 
-        return pickle.loads(str(pickled))
+        return pickle.loads(pickled)
 
 
 def memoize(func):
@@ -49,7 +49,6 @@ def memoize(func):
         signature = (func_name, args, kwargs) 
         sig_hash = hash(signature)
         stored_res = get(sig_hash)
-        print(stored_res)
         if stored_res: 
             return stored_res
         else:
