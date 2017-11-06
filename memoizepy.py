@@ -7,6 +7,7 @@ from __future__ import print_function
 # For other data stores, change store and get functions appropriately
 
 import mmh3                     # fast hashing library
+import pandas as pd
 import msgpack                  # fast serializer 
 import msgpack_numpy as m       # extends msgpack to Numpy: pip install msgpack-numpy
 from functools import wraps
@@ -16,12 +17,10 @@ m.patch()                       # patch msgpack to be able to do ndarrays
 
 r = redis.Redis(host = "localhost", port = 6379, decode_responses = True)
 
-def serialize(x):
-    return msgpack.packb(x)
-
 
 def hash(x):
-    return str(mmh3.hash128(serialize(x)))
+    xx = [z.to_msgpack() if isinstance(z, pd.DataFrame) else z for z in x]
+    return str(mmh3.hash128(msgpack.packb(xx)))
 
 
 def store(hash, data):
