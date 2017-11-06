@@ -1,8 +1,8 @@
 ## memoizepy
 
 use to memoize a function using Redis. 
-Relies on Redis on default port and localhost
-Works on Numpy and Pandas
+Relies on Redis on default port and localhost. 
+Works on Numpy and Pandas.
 
 ## usage:
 ```
