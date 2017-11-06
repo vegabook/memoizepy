@@ -7,7 +7,6 @@ from __future__ import print_function
 # For other data stores, change store and get functions appropriately
 
 import mmh3                     # fast hashing library
-import pandas as pd
 from functools import wraps
 import redis
 import pdb
